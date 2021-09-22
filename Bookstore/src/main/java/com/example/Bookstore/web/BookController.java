@@ -2,6 +2,7 @@ package com.example.Bookstore.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Bookstore.domain.Book;
 import com.example.Bookstore.domain.BookRepository;
+import com.example.Bookstore.domain.CategoryRepository;
 
 	
 
@@ -22,6 +24,9 @@ public class BookController {
 	
 	@Autowired
 	private BookRepository repository;
+	
+	@Autowired
+	private CategoryRepository crepository;
 	
 	private List<Book> books = new ArrayList<Book>();
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -52,6 +57,7 @@ public class BookController {
 	@RequestMapping(value = "/add")
 	public String addBook(Model model){
 	 model.addAttribute("book", new Book());
+	 model.addAttribute("categories", crepository.findAll());
 	 return "addbook";
 	}
 	
@@ -69,8 +75,9 @@ public class BookController {
 	
 	@RequestMapping(value = "/edit/{id}")
 	public String addBook(@PathVariable("id") Long bookId, Model model){
-	model.addAttribute("book", repository.findById(bookId));
-	return "editbook";
+	 model.addAttribute("book", repository.findById(bookId));
+	 model.addAttribute("categories", crepository.findAll());
+	 return "editbook";
 	}
 
 }
