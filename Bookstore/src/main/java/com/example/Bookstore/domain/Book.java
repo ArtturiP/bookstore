@@ -79,9 +79,8 @@ public class Book {
 
 	public Book() {}
 	
-	public Book(Long id, String title, String author, int year, String isbn, double price, Category category) {
+	public Book(String title, String author, int year, String isbn, double price, Category category) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.year = year;
@@ -92,9 +91,14 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
-				+ ", price=" + price + ", category=" + category + "]";
+		if (this.category != null)
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn + ", price=" + price
+				+ ", category=" + this.getCategory() + "]";
+		else
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn + ", price=" + price
+				+ "]";
 	}
+
 
 	
 
